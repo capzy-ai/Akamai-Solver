@@ -71,13 +71,35 @@ The `solution` object contains:
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `cookies` | `array` | Cookie objects ({name, value, domain, path}) including _abck, bm_sz, ak_bmsc |
-| `userAgent` | `string` | User-Agent used — must match when reusing cookies |
-| `ipBound` | `boolean` | Always true — cookies only work from the IP that solved them |
+| `cookies` | `array`   | Cookie objects `{name, value, domain, path}`. Always includes `_abck` (with `~0~`) and `bm_sz`. Also includes any secondary Akamai cookies the deployment set (`ak_bmsc`, `bm_sv`, `bm_mi`, `bm_so`, `sbsd_o`). |
+| `userAgent`   | `string`  | Exact User-Agent the browser used while earning the cookies. Reuse verbatim on replay. |
+| `ipBound`     | `boolean` | Always `true`. Cookies are bound to the IP that solved the challenge. |
+| `domain`      | `string`  | Hostname the cookies were validated against (host portion of `websiteURL`). |
+| `sensorPosts` | `integer` | bmak sensor_data POST count during the solve. Normal: 1–3. Diagnostic only. |
+
+#### Concrete example
+
+```json
+{
+  "errorId": 0,
+  "status": "ready",
+  "solution": {
+    "cookies": [
+      { "name": "_abck",   "value": "0F8B...~0~YAAQa...~-1~|...", "domain": ".example.com", "path": "/" },
+      { "name": "bm_sz",   "value": "8E6A...AAQAAQ==",            "domain": ".example.com", "path": "/" },
+      { "name": "ak_bmsc", "value": "C4F2...0000",                "domain": ".example.com", "path": "/" }
+    ],
+    "userAgent":   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    "ipBound":     true,
+    "domain":      "www.example.com",
+    "sensorPosts": 2
+  }
+}
+```
 
 ### How to use the solution
 
-Set every returned cookie on your HTTP client and reuse the User-Agent. Cookies are IP-bound — keep the same source IP for follow-up requests.
+Set every cookie from `cookies` on your HTTP client preserving `domain` and `path`, reuse the exact `userAgent`, and replay through the same IP that solved the challenge. Akamai validates the cookie set as a unit — missing any cookie (especially `bm_sz`, which seeds the PRNG for subsequent sensor posts), swapping the UA, or coming from a different egress IP all invalidate the session.
 
 ### Error
 
