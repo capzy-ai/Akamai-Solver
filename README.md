@@ -142,7 +142,7 @@ When the task is ready (`status: "ready"`), `solution` contains:
 | `domain` | `string` | Hostname the cookies were validated against (host of `websiteURL`). |
 | `sensorPosts` | `integer` | Number of bmak sensor_data POSTs fired during the solve. Normal: 1–3. Diagnostic only. |
 
-### Example solution
+### Example
 
 ```json
 {
@@ -172,46 +172,6 @@ When the task is ready (`status: "ready"`), `solution` contains:
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
     "ipBound": true,
     "domain": "www.example.com",
-    "sensorPosts": 2
-  }
-}
-```
-
-### Example
-
-```json
-{
-  "status": "ready",
-  "solution": {
-    "cookies": [
-      {
-        "name": "_abck",
-        "value": "<hash>~0~<timestamp>~...",
-        "domain": ".target.example.com",
-        "path": "/"
-      },
-      {
-        "name": "bm_sz",
-        "value": "<sensor PRNG seed cookie>",
-        "domain": ".target.example.com",
-        "path": "/"
-      },
-      {
-        "name": "ak_bmsc",
-        "value": "<value>",
-        "domain": ".target.example.com",
-        "path": "/"
-      },
-      {
-        "name": "bm_sv",
-        "value": "<value>",
-        "domain": ".target.example.com",
-        "path": "/"
-      }
-    ],
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-    "ipBound": true,
-    "domain": "target.example.com",
     "sensorPosts": 2
   }
 }
