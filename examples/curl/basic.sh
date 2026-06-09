@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
 #
-# Solve Akamai Bot Manager with Capzy — pure curl + jq.
+# Solve Akamai Bot Manager (Web / desktop variant) with Capzy —
+# pure curl + jq. Returns the _abck cookie + matched UA which you
+# paste into your scraper's HTTP client.
 #
-# Cost:   from $0.001 per solve (flat)
-# Speed:  ~12 seconds median
+# For the MOBILE BMP variant (X-acf-sensor-data header from native
+# iOS/Android apps), see ../../akamai-bmp/examples/curl/basic.sh —
+# different task type (AntiAkamaiBMPTask), different inputs
+# (packageName + version), different output (sensors[] + useragent).
+#
+# Cost:   $0.05 per solve
+# Speed:  ~14 seconds median
 #
 # Requires: curl, jq (brew install jq / apt install jq)
 #
@@ -19,8 +26,8 @@ API_BASE="${API_BASE:-https://api.capzy.ai}"
 # Customize the task body to match the target site you're solving.
 TASK=$(cat <<'JSON'
 {
-    "type": "AntiAkamaiBMPTaskProxyLess",
-    "websiteURL": "https://example.com/"
+    "type": "AntiAkamaiWebTaskProxyLess",
+    "websiteURL": "https://example.com/protected-path"
 }
 JSON
 )
