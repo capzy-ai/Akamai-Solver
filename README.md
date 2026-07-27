@@ -6,16 +6,16 @@
 
 **Bypass Akamai BMP. Returns validated _abck, bm_sz, ak_bmsc cookies.**
 
-[![Solve cost](https://img.shields.io/badge/from-%240.001%20%2F%20solve-%23ff5d2a)](https://capzy.ai/pricing)
-[![Speed](https://img.shields.io/badge/avg%20solve-~12%20seconds-%2322c55e)](https://capzy.ai/products/akamai)
+[![Solve cost](https://img.shields.io/badge/from-%240.001%20%2F%20solve-%23ff5d2a)](https://capzy.ai/solvers)
+[![Speed](https://img.shields.io/badge/avg%20solve-~12%20seconds-%2322c55e)](https://capzy.ai/solvers/akamai)
 [![Uptime](https://img.shields.io/badge/uptime-99.9%25-%2322c55e)](https://capzy.ai/status)
 [![License: MIT](https://img.shields.io/badge/license-MIT-%23ff5d2a)](LICENSE)
 
-[Live Demo](https://capzy.ai/products/akamai/demo) ·
+[Live Demo](https://capzy.ai/solvers/akamai/demo) ·
 [Get Free $0.10 Credit](https://capzy.ai/auth/register) ·
 [Dashboard](https://capzy.ai/dashboard) ·
 [Full Docs](https://capzy.ai/docs) ·
-[Pricing](https://capzy.ai/pricing)
+[Pricing](https://capzy.ai/solvers)
 
 </div>
 
@@ -201,7 +201,7 @@ Set every cookie from the `cookies` array on your HTTP client (keep `domain` and
 ## Other captcha types
 
 Capzy solves 25+ captcha types. Full catalog at
-[capzy.ai/pricing](https://capzy.ai/pricing). Each type has its own
+[capzy.ai/solvers](https://capzy.ai/solvers). Each type has its own
 solver repo on [github.com/capzy-ai](https://github.com/capzy-ai).
 
 ## License
