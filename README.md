@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://capzy.ai/capzy-logo.svg" alt="Capzy" width="220" />
+<img src="https://capzy.ai/capzy-icon.png" alt="Capzy" width="96" />
 
-# Akamai Bot Manager Solver
+# Akamai Bot Manager Captcha Solver
 
 **Bypass Akamai BMP. Returns validated _abck, bm_sz, ak_bmsc cookies.**
 
@@ -136,50 +136,13 @@ When the task is ready (`status: "ready"`), `solution` contains:
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `cookies` | `array` | Cookie objects `{name, value, domain, path}`. Always includes `_abck` (containing `~0~`) and `bm_sz`. Also includes any other Akamai cookies the deployment set (`ak_bmsc`, `bm_sv`, `bm_mi`, `bm_so`, `sbsd_o`). |
-| `userAgent` | `string` | Exact User-Agent the browser used. Reuse verbatim on replay — Akamai correlates UA with the TLS fingerprint. |
-| `ipBound` | `boolean` | Always `true`. Cookies are bound to the IP that solved the challenge. |
-| `domain` | `string` | Hostname the cookies were validated against (host of `websiteURL`). |
-| `sensorPosts` | `integer` | Number of bmak sensor_data POSTs fired during the solve. Normal: 1–3. Diagnostic only. |
-
-### Example
-
-```json
-{
-  "errorId": 0,
-  "status": "ready",
-  "solution": {
-    "cookies": [
-      {
-        "name": "_abck",
-        "value": "0F8B...~0~YAAQa...~-1~|...",
-        "domain": ".example.com",
-        "path": "/"
-      },
-      {
-        "name": "bm_sz",
-        "value": "8E6A...AAQAAQ==",
-        "domain": ".example.com",
-        "path": "/"
-      },
-      {
-        "name": "ak_bmsc",
-        "value": "C4F2...0000",
-        "domain": ".example.com",
-        "path": "/"
-      }
-    ],
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-    "ipBound": true,
-    "domain": "www.example.com",
-    "sensorPosts": 2
-  }
-}
-```
+| `cookies` | `array` | Cookie objects ({name, value, domain, path}) including _abck, bm_sz, ak_bmsc |
+| `userAgent` | `string` | User-Agent used — must match when reusing cookies |
+| `ipBound` | `boolean` | Always true — cookies only work from the IP that solved them |
 
 ### How to use the result
 
-Set every cookie from the `cookies` array on your HTTP client (keep `domain` and `path` intact), reuse the exact `userAgent`, and replay through the same IP that solved the challenge. Akamai validates the full set as a unit — missing `bm_sz`, swapping the UA, or coming from a different egress IP all invalidate the session immediately.
+Set every returned cookie on your HTTP client and reuse the User-Agent. Cookies are IP-bound — keep the same source IP for follow-up requests.
 
 ## Features
 
@@ -203,6 +166,24 @@ Set every cookie from the `cookies` array on your HTTP client (keep `domain` and
 Capzy solves 25+ captcha types. Full catalog at
 [capzy.ai/solvers](https://capzy.ai/solvers). Each type has its own
 solver repo on [github.com/capzy-ai](https://github.com/capzy-ai).
+
+## The Capzy platform
+
+Capzy is web access infrastructure for modern automation. Beyond captcha solving:
+
+| Product | What it does |
+|---------|--------------|
+| **[Solver API](https://capzy.ai/solvers)** | Solve 25+ captcha types through one HTTP API. |
+| **[Cloud Browser](https://capzy.ai/browser)** | Real remote Chrome over CDP / WebSocket, billed per GB. |
+| **[Fingerprint API](https://capzy.ai/fingerprints)** | Coherent, authentic browser fingerprints on demand. |
+| **[Proxies API](https://capzy.ai/proxies)** | Global proxy egress with simple per-GB pricing. |
+| **[Web Scraper API](https://capzy.ai/web-scraper)** | Fetch, render, bypass anti-bot, and extract in one call. |
+
+One API key and one wallet balance across every product.
+
+## Keywords
+
+`akamai bot manager solver`, `akamai bot manager captcha solver`, `akamai bot manager bypass`, `akamai bot manager api`, `solve akamai bot manager`, `akamai bot manager solving service`, `captcha solver`, `captcha solving api`, `automated captcha solver`, `captcha bypass api`
 
 ## License
 

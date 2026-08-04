@@ -1,15 +1,8 @@
 /**
- * Solve Akamai Bot Manager (Web / desktop variant) with Capzy —
- * minimal Node.js example. Returns the _abck cookie + matched UA
- * which you paste into your scraper's HTTP client.
+ * Solve Akamai Bot Manager with Capzy — minimal Node.js example.
  *
- * For the MOBILE BMP variant (X-acf-sensor-data header from native
- * iOS/Android apps), see ../../akamai-bmp/examples/nodejs/basic.js —
- * different task type (AntiAkamaiBMPTask), different inputs
- * (packageName + version), different output (sensors[] + useragent).
- *
- * Cost:   $0.05 per solve
- * Speed:  ~14 seconds median
+ * Cost:   from $0.001 per solve (flat)
+ * Speed:  ~12 seconds median
  *
  * Run with (Node 18+):
  *   export CAPZY_KEY="capzy_xxxxxxxxxxxxxxxxxxxxxxxx"
@@ -35,8 +28,8 @@ async function solve() {
   const created = await postJson("/createTask", {
     clientKey: CAPZY_KEY,
     task: {
-      "type": "AntiAkamaiWebTaskProxyLess",
-      "websiteURL": "https://example.com/protected-path"
+      "type": "AntiAkamaiBMPTaskProxyLess",
+      "websiteURL": "https://example.com/"
     },
   });
   if (created.errorId) {
